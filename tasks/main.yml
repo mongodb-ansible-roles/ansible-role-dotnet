@@ -17,7 +17,6 @@
     path: /usr/share/dotnet
     state: directory
     owner: root
-    group: root
     mode: "0755"
 
 - name: Install dotnet version
