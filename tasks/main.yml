@@ -1,1 +1,27 @@
 ---
+- name: Check if the dotnet install script exists
+  stat:
+    path: /tmp/dotnet-install.sh
+  register: st
+
+- name: Download dotnet script
+  get_url:
+    url: https://dot.net/v1/dotnet-install.sh
+    dest: /tmp/dotnet-install.sh
+    mode: "0755"
+  when: not st.stat.exists
+
+- name: Make sure dotnet directory exists
+  become: true
+  file:
+    path: /usr/share/dotnet
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Install dotnet version
+  command: /tmp/dotnet-install.sh --channel {{ item }} --install-dir /usr/share/dotnet/
+  args:
+    creates: /usr/share/dotnet/sdk/{{ item }}*
+  loop: "{{ dotnet_versions }}"

@@ -4,3 +4,8 @@
   hosts: all
   roles:
     - role: ansible-role-dotnet
+      vars:
+        dotnet_versions:
+          - 1.1
+          - 2.1
+          - 3.0

@@ -1,0 +1,10 @@
+---
+- name: Prepare
+  hosts: all
+  tasks:
+    - name: Install prerequisite packages
+      package:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - curl

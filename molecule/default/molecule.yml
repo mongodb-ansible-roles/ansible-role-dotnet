@@ -11,6 +11,8 @@ lint: |
 platforms:
   - name: debian9
     image: debian:9
+  - name: ubuntu1804
+    image: ubuntu:18.04
 provisioner:
   name: ansible
 verifier:
